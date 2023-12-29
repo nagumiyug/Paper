@@ -176,12 +176,16 @@ def cross(unit_list, count, paper):
                 for i in range(cross_position, cross_position + 2):
                     unit_new_one.problem_list[i] = unit_two.problem_list[i]
                     unit_new_two.problem_list[i] = unit_one.problem_list[i]
-                count_id += 1
-                unit_new_one.id = count_id
-                count_id += 1
-                unit_new_two.id = count_id
-                crossed_unit_list.append(unit_new_one)
-                crossed_unit_list.append(unit_new_two)
+
+                new_one_problem_set = list(set(unit_new_one.problem_list))
+                new_two_problem_set = list(set(unit_new_two.problem_list))
+                if len(new_one_problem_set) == len(unit_new_one.problem_list) and len(new_two_problem_set) == len(unit_new_two.problem_list):
+                    count_id += 1
+                    unit_new_one.id = count_id
+                    count_id += 1
+                    unit_new_two.id = count_id
+                    crossed_unit_list.append(unit_new_one)
+                    crossed_unit_list.append(unit_new_two)
 
     crossed_unit_list = get_kp_coverage(crossed_unit_list, paper)
     crossed_unit_list = get_adaptation_degree(crossed_unit_list, paper)
